@@ -5,6 +5,7 @@ class CreateIngredients < ActiveRecord::Migration[7.0]
       t.string :brand
       t.integer :calories
       t.integer :protein
+      t.integer :carbs
       t.integer :fat
       t.decimal :serving_size
       t.boolean :serving_type
