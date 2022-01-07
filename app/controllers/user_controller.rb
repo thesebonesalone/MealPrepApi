@@ -17,4 +17,27 @@ class UserController < ApplicationController
             render :json => data
         end
     end
+
+    def login
+        user = User.find_by(username: params[:username]) || User.find_by(email: params[:email])
+        if user & user.authenticate(params[:password])
+            data = {user: user, message: "Welcome Back"}
+            render :json => data
+        else
+            data = {message: "No Dice, Hombre"}
+            render :json => data
+        end
+
+    end
+
+    def show
+        user = User.find_by(username: params[:username])
+        if user
+            data = {message: "User found", user: user}
+            render :json => data
+        else
+            render :json => {message: "User not found"}
+        end
+
+    end
 end

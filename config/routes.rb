@@ -10,4 +10,5 @@ Rails.application.routes.draw do
 
   get '/signup' => 'user#new'
   post '/user' => 'user#create'
+  get '/user/show/"username' => 'user#show'
 end

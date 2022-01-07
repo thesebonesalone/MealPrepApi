@@ -5,8 +5,9 @@ class CreateRecipes < ActiveRecord::Migration[7.0]
       t.string :meal
       t.integer :servings
       
-
       t.timestamps
     end
+    
   end
+  
 end
