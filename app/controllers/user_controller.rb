@@ -3,12 +3,7 @@ class UserController < ApplicationController
     end
 
     def create
-        user = User.new(
-            username: params[:username],
-            email: params[:email],
-            password: params[:password],
-            password_confirmation: params[:password_confirmation]
-        )
+        user = User.new(user_params)
         if user.save
             data = {user: user, message: "Welcome!"}
             render :json => data
@@ -39,5 +34,11 @@ class UserController < ApplicationController
             render :json => {message: "User not found"}
         end
 
+    end
+
+    private
+    def user_params
+        puts params
+        params.permit(:username, :email, :password)
     end
 end
