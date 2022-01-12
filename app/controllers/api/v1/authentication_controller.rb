@@ -10,6 +10,16 @@ module Api
                     render :json => {message: "No dice"}
                 end
             end
+
+            def retrieve
+                id = AuthenticationTokenService.recall(params[:token])
+                user = User.find_by(id: id[0]["user_id"])
+                if user
+                    render :json => {message: "Success", user: {id: user.id, username: user.username}}
+                else
+                    render :json => {message: "No dice"}
+                end
+            end
         end
     end
 end

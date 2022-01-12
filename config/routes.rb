@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       post '/user' => 'user#create'
       get '/user/show/"username' => 'user#show'
       post '/auth' => 'authentication#create'
+      post '/retrieve' => 'authentication#retrieve'
     end
   end
 end

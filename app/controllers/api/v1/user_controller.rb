@@ -7,7 +7,7 @@ module Api
             def create
                 user = User.new(user_params)
                 if user.save
-                    data = {user: user, message: "Welcome!"}
+                    data = {user: user, message: "Success"}
                     render :json => data
                 else
                     data = {message: "Could not create user"}

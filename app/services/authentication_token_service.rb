@@ -6,4 +6,8 @@ class AuthenticationTokenService
         return JWT.encode payload, HMAC_SECRET, ALG_TYPE
     end
 
+    def self.recall(token)
+        return JWT.decode token, HMAC_SECRET, true, {algorithm: ALG_TYPE}
+    end
+
 end
