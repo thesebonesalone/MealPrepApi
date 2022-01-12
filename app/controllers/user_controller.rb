@@ -36,6 +36,17 @@ class UserController < ApplicationController
 
     end
 
+    def auth
+        user = User.find_by(username: params[:username])
+        if user.authenticate(params[:password])
+            data = {message: "Log in Successful", user: user}
+            render :json => data
+        else
+            render :json => {message: "Could not log in"}
+        end
+            
+    end
+
     private
     def user_params
         puts params
