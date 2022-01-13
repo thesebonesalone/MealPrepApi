@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       get '/recipe/show/:id', to: 'recipe#show'
       get '/recipe/search/:name', to: 'recipe#find_recipe_by_name'
+      get '/recipe/get/new', to: 'recipe#shownew'
 
       get '/ingredient/show/:id', to: 'ingredient#show'
       get '/ingredient/search/:name', to: 'ingredient#query_ingredients'

@@ -15,6 +15,11 @@ module Api
                 end
             end
 
+            def shownew
+                recipes = Recipe.order(created_at: :desc)
+                render :json => {recipes: recipes, message: "Newest Recipes"}
+            end
+
             def show
                 recipe = Recipe.find_by(id: params[:id])
                 puts params
