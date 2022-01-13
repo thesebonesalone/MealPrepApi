@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_07_154152) do
+ActiveRecord::Schema.define(version: 2022_01_13_161246) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,12 @@ ActiveRecord::Schema.define(version: 2022_01_07_154152) do
     t.boolean "serving_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "meat"
+    t.boolean "fish"
+    t.boolean "dairy"
+    t.boolean "nonvegan"
+    t.boolean "haram"
+    t.boolean "trefah"
   end
 
   create_table "instructions", force: :cascade do |t|
@@ -61,6 +67,10 @@ ActiveRecord::Schema.define(version: 2022_01_07_154152) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "calories"
+    t.integer "carbs"
+    t.integer "fat"
+    t.integer "protein"
   end
 
   add_foreign_key "instructions", "recipes"

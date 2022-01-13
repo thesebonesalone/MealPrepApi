@@ -25,7 +25,7 @@ module Api
             end
 
             def query_ingredients
-                list = Ingredient.where("name LIKE ?", "%" + params[:name] + "%")
+                list = Ingredient.where("name LIKE ?", "%" + params[:name] + "%").limit(5)
                 if list
                     data = {message: "Success", results: list}
                     render :json => data

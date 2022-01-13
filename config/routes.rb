@@ -5,6 +5,8 @@ Rails.application.routes.draw do
       get '/recipe/search/:name', to: 'recipe#find_recipe_by_name'
       get '/recipe/get/new', to: 'recipe#shownew'
 
+      get '/user/goals/:id', to: 'user#get_goals'
+
       get '/ingredient/show/:id', to: 'ingredient#show'
       get '/ingredient/search/:name', to: 'ingredient#query_ingredients'
       
@@ -13,7 +15,7 @@ Rails.application.routes.draw do
 
       get '/signup' => 'user#new'
       post '/user' => 'user#create'
-      get '/user/show/"username' => 'user#show'
+      get '/user/show/:username' => 'user#show'
       post '/auth' => 'authentication#create'
       post '/retrieve' => 'authentication#retrieve'
     end

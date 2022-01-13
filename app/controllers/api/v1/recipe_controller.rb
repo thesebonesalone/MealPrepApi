@@ -3,17 +3,40 @@ module Api
         class RecipeController < ApplicationController
 
             def create
-                puts recipe_params
-                @recipe = Recipe.new(recipe_params)
-                
-                if @recipe.save
-                    data = {recipe: @recipe, message: "Success"}
-                    render :json => data
+                recipe = Recipe.new
+                recipe.name = params[:recipe][:name]
+                recipe.user = User.find_by(id: params[:user_id])
+                if recipe.save
+                    params[:ingredients].map{|item|
+                        ii = Ingredient.find_by(id: item[:id])
+                        if ii == nil
+                            ii = Ingredient.new()
+                            ii.name = item[:name]
+                            ii.calories = item[:calories]
+                            ii.fat = item[:fat]
+                            ii.protein = item[:protein]
+                            ii.carbs = item[:carbs]
+                            ii.serving_type = item[:serving_type]
+                            ii.serving_size = item[:serving_size]
+                            ii.meat = item[:meat]
+                            ii.fish = item[:fish]
+                            ii.dairy = item[:dairy]
+                            ii.nonvegan = item[:nonvegan]
+                            ii.haram = item[:haram]
+                            ii.trefah = item[:trefah]
+                            ii.save
+                        end
+                        ri = RecipeIngredient.new
+                        ri.recipe = recipe
+                        ri.ingredient = ii
+                        ri.save}
+                    
                 else
                     data = {message: "Could Not Create Recipe"}
                     render :json => data
                 end
             end
+
 
             def shownew
                 recipes = Recipe.order(created_at: :desc)
@@ -43,11 +66,7 @@ module Api
                 end
             end
 
-            private
-            def recipe_params
-                puts params
-                params.permit(:name, :meal)
-            end
+            
 
         end
     end

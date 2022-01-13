@@ -38,6 +38,16 @@ module Api
 
             end
 
+            def get_goals
+                user = User.find_by(id: params[:id])
+                data = {message: "Could not get goals"}
+                if user
+                    data = {message: "Success", user: user}
+                end
+                render :json => data
+
+            end
+
             def auth
                 user = User.find_by(username: params[:username])&.authenticate(params[:password])
                 if user
@@ -52,7 +62,7 @@ module Api
             private
             def user_params
                 puts params
-                params.permit(:username, :email, :password)
+                params.permit(:username, :email, :password, :calories, :fat, :protein, :carbs)
             end
         end
     end
