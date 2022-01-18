@@ -62,7 +62,7 @@ module Api
             private
             def user_params
                 puts params
-                params.permit(:username, :email, :password, :calories, :fat, :protein, :carbs)
+                params.permit(:username, :email, :password)
             end
         end
     end

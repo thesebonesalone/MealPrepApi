@@ -7,6 +7,12 @@ module Api
                 recipe.name = params[:recipe][:name]
                 recipe.user = User.find_by(id: params[:user_id])
                 if recipe.save
+                    params[:instructions].map{|item|
+                    ii = Instruction.new()
+                    ii.description = item
+                    ii.recipe = recipe
+                    ii.save}
+
                     params[:ingredients].map{|item|
                         ii = Ingredient.find_by(id: item[:id])
                         if ii == nil
@@ -30,6 +36,8 @@ module Api
                         ri.recipe = recipe
                         ri.ingredient = ii
                         ri.save}
+                    data = {message: "Success", recipe: recipe}
+                    render :json => data
                     
                 else
                     data = {message: "Could Not Create Recipe"}
