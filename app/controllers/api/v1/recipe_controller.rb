@@ -45,9 +45,14 @@ module Api
                 end
             end
 
+            def grab_recipe(recipe)
+                return {recipe: recipe, ingredients: recipe.ingredients, instructions: recipe.instructions}
+            end
+
 
             def shownew
-                recipes = Recipe.order(created_at: :desc)
+                recipes = Recipe.order(created_at: :desc).map{|recipe| 
+                grab_recipe(recipe)}
                 render :json => {recipes: recipes, message: "Newest Recipes"}
             end
 
